@@ -3,9 +3,9 @@ import pandas as pd
 from keras.models import load_model
 from sklearn.preprocessing import LabelBinarizer
 
-model = load_model('Models/base_model_asl_50')
+model = load_model('Models/base_model_asl_50_v2')
 
-test_df = pd.read_csv("MNSIT/sign_mnist_validate/sign_mnist_validate.csv")
+test_df = pd.read_csv("MNSIT/sign_mnist_test/sign_mnist_test.csv")
 
 # print(test_df)
 
