@@ -8,7 +8,7 @@ from keras.models import load_model
 from sklearn.preprocessing import LabelBinarizer
 from operator import itemgetter
 
-model = load_model('Models/base_model_asl_50_v2')
+model = load_model('Models/base_model_asl_50')
 
 image_file = 'test_img.jpg'
 img = Image.open(image_file)

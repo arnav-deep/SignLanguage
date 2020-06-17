@@ -22,8 +22,8 @@ validate_df = pd.read_csv("MNSIT/sign_mnist_validate/sign_mnist_validate.csv")
 validate = pd.read_csv("MNSIT/sign_mnist_validate/sign_mnist_validate.csv")
 y = validate['label']
 
-plt.figure(figsize=(5, 5))
-sns.countplot(train_df['label'])
+# plt.figure(figsize=(5, 5))
+# sns.countplot(train_df['label'])
 
 y_train = train_df['label']
 y_validate = validate_df['label']
@@ -43,14 +43,14 @@ x_validate = x_validate / 255
 x_train = x_train.reshape(-1, 28, 28, 1)
 x_validate = x_validate.reshape(-1, 28, 28, 1)
 
-f, ax = plt.subplots(2, 5)
-f.set_size_inches(10, 10)
-k = 0
-for i in range(2):
-    for j in range(5):
-        ax[i, j].imshow(x_train[k].reshape(28, 28), cmap="gray")
-        k += 1
-    plt.tight_layout()
+# f, ax = plt.subplots(2, 5)
+# f.set_size_inches(10, 10)
+# k = 0
+# for i in range(2):
+#     for j in range(5):
+#         ax[i, j].imshow(x_train[k].reshape(28, 28), cmap="gray")
+#         k += 1
+#     plt.tight_layout()
 
 datagen = ImageDataGenerator(
         featurewise_center=False,  # set input mean to 0 over the dataset
@@ -81,7 +81,7 @@ model.add(Dense(units=24, activation='softmax'))
 model.compile(optimizer=Adam(lr=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
 model.summary()
 
-hist = model.fit(datagen.flow(np.array(x_train), np.array(y_train), batch_size=128), epochs=50,
+hist = model.fit(datagen.flow(np.array(x_train), np.array(y_train), batch_size=128), epochs=60,
                  validation_data=(np.array(x_validate), np.array(y_validate)))
 
 plt.plot(hist.history['loss'])
@@ -89,7 +89,7 @@ plt.plot(hist.history['val_loss'])
 plt.title('model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='upper left')
+plt.legend(['train', 'validate'], loc='upper left')
 plt.show()
 
-model.save('Models/base_model_asl_50_v2')
+model.save('Models/base_model_asl_60')
